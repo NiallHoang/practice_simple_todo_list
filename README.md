@@ -1,5 +1,5 @@
 # Simple todolist
-contain these features:
+contains these features:
 + Add tasks with due dates.
 + Organize tasks into four sections: "Today," "This Week," "This Month," and "All Tasks."
 + Mark tasks as complete with checkboxes.
