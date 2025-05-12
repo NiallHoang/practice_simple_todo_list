@@ -1,20 +1,26 @@
-import {React} from "react";
+import React from "react";
 import TaskItem from "./TaskItem";
 
-function TaskList({tasks, onDelete, onMoveUp, onMoveDown}){
+function TaskList({ tasks, onDelete, onToggleComplete, onUpdateDate, onMoveUp, onMoveDown }) {
     return (
-        <ol>
-        {tasks.map((task, index) => (
-            <TaskItem
-            key={index}
-            task={task}
-            index={index}
-            onDelete={onDelete}
-            onMoveUp={onMoveUp}
-            onMoveDown={onMoveDown}
-            />
-        ))}
-        </ol>
+        <ul className="task-list">
+            {tasks.length === 0 ? (
+                <li className="empty-list">No tasks available</li>
+            ) : (
+                tasks.map((task) => (
+                    <TaskItem
+                        key={task.id}
+                        task={task}
+                        onDelete={onDelete}
+                        onToggleComplete={onToggleComplete}
+                        onUpdateDate={onUpdateDate}
+                        onMoveUp={onMoveUp}
+                        onMoveDown={onMoveDown}
+                    />
+                ))
+            )}
+        </ul>
     );
-};
+}
+
 export default TaskList;
