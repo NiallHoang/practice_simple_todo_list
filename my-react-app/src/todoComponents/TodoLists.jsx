@@ -3,6 +3,9 @@ import swal from "sweetalert";
 import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 
+import { db } from "../fireBaseconfig";
+import {collection, addDoc, getDocs, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy} from 'firebase/firestore';
+
 function isValidDate(dateString) {
     // First check if the string matches YYYY-MM-DD format
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
@@ -54,6 +57,8 @@ function TodoList() {
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
+
+
 
     function handleInputChange(event) {
         setNewTask(event.target.value);
