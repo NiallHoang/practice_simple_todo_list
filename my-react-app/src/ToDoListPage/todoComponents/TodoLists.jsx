@@ -47,30 +47,6 @@ function TodoList() {
         { id: "all", label: "All Tasks" }
     ];
 
-    // Load tasks from localStorage on component mount
-    // useEffect(() => {
-    //     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    //     storedTasks.sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort tasks by due date
-    //     setTasks(storedTasks);
-    // }, []);
-
-    // Save tasks to localStorage whenever they change
-    // useEffect(() => {
-    //     localStorage.setItem("tasks", JSON.stringify(tasks));
-    // }, [tasks]);
-    // useEffect(() => {
-    //     const user = auth.currentUser;
-    //     if (!user) return;
-    //     const q = query(collection(db, "users", user.uid, "tasks"), orderBy("order"));
-    //     const unsubscribe = onSnapshot(q, (snapshot) => {
-    //         const tasksData = snapshot.docs.map(doc => ({
-    //             ...doc.data(),
-    //             id: doc.id
-    //         }));
-    //         setTasks(tasksData);
-    //     })
-    //     return () => unsubscribe();
-    // }, []);
     useEffect(() => {
         let unsubscribeTasks = null;
         const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
@@ -102,34 +78,6 @@ function TodoList() {
         setDueDate(event.target.value);
     }
 
-    // function addNewTask() {
-    //     if (newTask.trim() === "" || dueDate === "") {
-    //         swal("Error", "Please enter both task and due date!", "error");
-    //         return;
-    //     }
-
-    //     if(!isValidDate(dueDate)) {
-    //         swal("Error", "Please enter a valid due date in the correct format!", "error");
-    //         return;
-    //     }
-
-    //     const newTaskObj = {
-    //         id: Date.now(),
-    //         text: newTask,
-    //         date: dueDate,
-    //         completed: false,
-    //     };
-
-    //     setTasks((prevTasks) => {
-    //         // Add the new task and sort by date
-    //         const updatedTasks = [...prevTasks, newTaskObj];
-    //         updatedTasks.sort((a, b) => new Date(a.date) - new Date(b.date));
-    //         return updatedTasks;
-    //     });
-
-    //     setNewTask("");
-    //     setDueDate(new Date().toISOString().slice(0, 10));
-    // }
     async function addNewTask() {
         const user = auth.currentUser;
         if (!user) return;
@@ -148,20 +96,6 @@ function TodoList() {
     }
 
 
-    // function deleteTask(taskId) {
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "Once deleted, you will not be able to recover this task!",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     }).then((willDelete) => {
-    //         if (willDelete) {
-    //             setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-    //             swal("Task deleted successfully!", { icon: "success" });
-    //         }
-    //     });
-    // }
     async function deleteTask(taskID) {
         const user = auth.currentUser;
         if (!user) return;
@@ -179,48 +113,13 @@ function TodoList() {
         })
     };
 
-    // function toggleTaskCompletion(taskId) {
-    //     setTasks((prevTasks) =>
-    //         prevTasks.map((task) =>
-    //             task.id === taskId ? { ...task, completed: !task.completed } : task
-    //         )
-    //     );
-    // }
+
     async function toggleTaskCompletion(taskID, currentCompleted) {
         const user = auth.currentUser;
         if (!user) return;
         await updateDoc(doc(db, "users", user.uid, "tasks", taskID), { completed: !currentCompleted });
     };
 
-
-    // function updateTaskDate(taskId, newDate) {
-    //     if (!isValidDate(newDate)) {
-    //         swal("Error", "Please enter a valid due date in the correct format!", "error");
-    //         return;
-    //     }
-
-    //     const taskToUpdate = tasks.find((task) => task.id === taskId);
-
-    //     if (taskToUpdate) {
-    //         swal({
-    //             title: "Are you sure?",
-    //             text: `Update the due date from ${taskToUpdate.date} to ${newDate}.`,
-    //             icon: "info",
-    //             buttons: ["Cancel", "Yes"],
-    //         }).then((willChangeDate) => {
-    //             if (willChangeDate) {
-    //                 setTasks(prevTasks => {
-    //                     const updatedTasks = prevTasks.map((task) =>
-    //                         task.id === taskId ? { ...task, date: newDate } : task
-    //                     );
-    //                     // Re-sort tasks after updating the date
-    //                     updatedTasks.sort((a, b) => new Date(a.date) - new Date(b.date));
-    //                     return updatedTasks;
-    //                 });
-    //             }
-    //         });
-    //     }
-    // }
     async function updateTaskDate(taskId, newDate) {
         const user = auth.currentUser;
         if (!user) return;
@@ -233,28 +132,7 @@ function TodoList() {
         });
     }
 
-    // Added functions for moving tasks up and down
-    // function moveTaskUp(taskId) {
-    //     setTasks(prevTasks => {
-    //         const index = prevTasks.findIndex(task => task.id === taskId);
-    //         if (index <= 0) return prevTasks; // Can't move up if already at top
 
-    //         const newTasks = [...prevTasks];
-    //         [newTasks[index], newTasks[index - 1]] = [newTasks[index - 1], newTasks[index]];
-    //         return newTasks;
-    //     });
-    // }
-
-    // function moveTaskDown(taskId) {
-    //     setTasks(prevTasks => {
-    //         const index = prevTasks.findIndex(task => task.id === taskId);
-    //         if (index === -1 || index === prevTasks.length - 1) return prevTasks; // Can't move down if at bottom
-
-    //         const newTasks = [...prevTasks];
-    //         [newTasks[index], newTasks[index + 1]] = [newTasks[index + 1], newTasks[index]];
-    //         return newTasks;
-    //     });
-    // }
     async function moveTaskUp(taskId) {
         const user = auth.currentUser;
         if (!user) return;

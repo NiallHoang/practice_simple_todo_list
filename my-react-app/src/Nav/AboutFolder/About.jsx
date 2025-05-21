@@ -1,31 +1,3 @@
-// import React from "react";
-
-// function About() {
-//     return(
-//         <>
-//         <h4>A bit<h1>About us</h1></h4>
-//         <ul className="product-list">
-//             <li>
-//                 <h3>Person A</h3>
-//                 <p className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit mi quis, vulputate magna.</p>
-//             </li>
-//             <li>
-//                 <h3>Person B</h3>
-//                 <p className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit mi quis, vulputate magna.</p>
-//             </li>
-//             <li>
-//                 <h3>Person C</h3>
-//                 <p className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit mi quis, vulputate magna.</p>
-//             </li>
-//             <li>
-//                 <h3>Person D</h3>
-//                 <p className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit mi quis, vulputate magna.</p>
-//             </li>
-//         </ul>
-//         </>
-//     )
-// };
-// export default About;
 import React from 'react';
 import img1 from './dog1.jpg';
 import img2 from './dog2.jpg';
