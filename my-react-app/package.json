@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.2.0",
+    "antd": "^5.25.2",
     "firebase": "^11.7.3",
     "next": "^15.3.2",
+    "ntd": "^0.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0",

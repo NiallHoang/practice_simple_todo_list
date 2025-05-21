@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import Validation from './signUpvalidation';
+import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../fireBaseconfig';
+import { auth, db } from '../../fireBaseconfig';
 import '../signUp/signUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+
 
 
 function Signup() {
@@ -32,7 +34,8 @@ function Signup() {
     setFirebaseError('');
     if (err.name === '' && err.email === '' && err.password === '') {
       try {
-        await createUserWithEmailAndPassword(auth, values.email, values.password);
+        const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+        await setDoc(doc(db, "users", userCredential.user.uid),{name: values.name, email: values.email});
         navigate('/todolist');
       }
       catch (error) {
