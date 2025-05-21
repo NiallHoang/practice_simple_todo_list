@@ -1,4 +1,9 @@
-# Simple todolist
+# Simple landing page with nav bar contains:
++ Home
++ Contact
++ About
+# Simple signup/signin/signout features
+# Simple todolist store data using BaaS(cloud firestore)
 contains these features:
 + Add tasks with due dates.
 + Organize tasks into four sections: "Today," "This Week," "This Month," and "All Tasks."
